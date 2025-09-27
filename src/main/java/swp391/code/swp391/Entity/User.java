@@ -59,6 +59,5 @@ public class User {
         ADMIN,
         STAFF
     }
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Vehicle> vehicles;
+
 }
