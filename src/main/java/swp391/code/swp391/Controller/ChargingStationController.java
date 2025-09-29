@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import swp391.code.swp391.Entity.ChargingStation;
 import swp391.code.swp391.Service.ChargingStationService;
+import swp391.code.swp391.dto.StationAddingDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +34,9 @@ public class ChargingStationController {
     // 3. Tạo trạm sạc mới
     @PostMapping
     public ResponseEntity<ChargingStation> createStation(
-            @RequestParam String stationName,
-            @RequestParam String address) {
-        ChargingStation station = chargingStationService.createChargingStation(stationName, address);
+            @RequestBody StationAddingDTO chargingStation) {
+        System.out.println("chargingStation: " + chargingStation.getStationName());
+        ChargingStation station = chargingStationService.createChargingStation(chargingStation);
         return ResponseEntity.ok(station);
     }
 

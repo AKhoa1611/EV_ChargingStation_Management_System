@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import swp391.code.swp391.Entity.ChargingStation;
 import swp391.code.swp391.Repository.ChargingStationRepository;
+import swp391.code.swp391.dto.StationAddingDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,11 +26,14 @@ public class ChargingStationService {
     }
 
     // Tạo trạm sạc mới
-    public ChargingStation createChargingStation(String stationName, String address) {
+    public ChargingStation createChargingStation(StationAddingDTO stationAddingDTO) {
         ChargingStation station = new ChargingStation();
-        station.setStationName(stationName);
-        station.setAddress(address);
-        station.setStatus(ChargingStation.ChargingStationStatus.ACTIVE);
+        station.setStationName(stationAddingDTO.getStationName());
+        station.setAddress(stationAddingDTO.getAddress());
+        station.setLongitude(stationAddingDTO.getLongitude());
+        station.setLatitude(stationAddingDTO.getLatitude());
+        station.setNumberOfPort(stationAddingDTO.getNumberOfPort());
+        station.setStatus(ChargingStation.ChargingStationStatus.valueOf(stationAddingDTO.getStatus()));
         return chargingStationRepository.save(station);
     }
 
